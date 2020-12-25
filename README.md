@@ -4,16 +4,15 @@
 
 Like the title indicates, this program takes two bitmap images and blends them according to an input ratio. For examples, if the user took this bitmap image
 
-![lion](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/Screen Shot 2020-12-25 at 1.55.36 PM.png?raw=true)
+![lion](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true)
 
 and this image
 
-
-wolf
+![wolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true)
 
 and input these images into the mixer with a ratio of 0.5, the resulting output of the program would be this.
 
-Test
+![lolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true)
 
 
 # How to use this program 
@@ -31,4 +30,4 @@ Where `imagefile1` and `imagefile2` are the images you want to blend, `ratio` is
 
 # Why I made this project and what I learned from it
 
-I designed this program for my systems programming class. This project truly tested my foundations of allocated memory and how it relates data structures on the heap. I also learned how to implement bilinear interpolation such that images of different ratios could be blended seemlessly
+I designed this program for my systems programming class. This project tested my foundations of allocated memory and data structures on the heap. I also learned how to implement bilinear interpolation such the program could blend images of different sizes seemlessly. 
