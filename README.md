@@ -1,6 +1,6 @@
 ## C-bmp-mixer
 
-# What thsi project is
+# What is this project?
 
 Like the title indicates, this program takes two bitmap images and blends them according to an input ratio. For examples, if the user took this bitmap image
 
