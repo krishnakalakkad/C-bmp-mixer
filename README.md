@@ -43,7 +43,7 @@ Dynamic memory is set up in such a way that I couldn't just `fread()` all the in
 **My approach**
 I used pen and paper to draw what the memory allocated for the `filetagheader` looked like.
 
-![drawing2](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/Drawing2.JPG =100x20)
+![drawing2](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/Drawing2.JPG)
 
 
 I discovered that there was a lot of padding within the filetagheader data structure, which is why the brutish method of trying to `fread()` all the data at one shot would not work. As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a bunch of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code a pain. So I decided to make a C file called `setUp.c`, and write a function called `void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup);` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
