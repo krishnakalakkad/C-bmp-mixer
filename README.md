@@ -4,11 +4,10 @@
 
 Like the title indicates, this program takes two bitmap images and blends them according to an input ratio. For examples, if the user took this bitmap image
 
-| Step | Image |
-|------|-------|
-| Image A | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true" align="center" width="300"> |
-| Image B | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true" align="center" width="300"> |
-| Blended | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true" align="center" width="300"> |
+| Image A | Image B | Blended |
+|------|-------| ------ |
+| <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true" align="center" width="300"> | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true" align="center" width="300"> | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true" align="center" width="300"> |
+
 
 
 # How to use this program 
