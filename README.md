@@ -46,26 +46,7 @@ I used pen and paper to draw what the memory allocated for the `filetagheader` l
 **Effects that this approach had on organization**
 I applied this organization style of compartmentalizing functions into different C files, whick reduced my main function by over 300 lines. To do this, I had to pass many thing through reference, so I needed to create a lot of different data structures to organize all the data I had to keep track of. These are the supplementary data structures that helped me:
 
-`typedef struct
-{
-    FILE* file1;
-    FILE* file2;
-    FILE* final;
-} FileGroup;
 
-typedef struct {
-    tagBITMAPFILEHEADER fileHd1, fileHd2, finalFileHd;
-} FileHeaderGroup;
-
-typedef struct {
-    tagBITMAPINFOHEADER infoHd1, infoHd2, finalInfoHd;
-} InfoHeaderGroup;
-
-typedef struct
-{
-    int width, height, padWidth, size;
-	FILE* file;
-} ImageAttributes;`
 
 Compartmentalizing everything makes the debugging process much more transparent on all debugging applications because the backtrace from a debugging software shows the cause of the error much more clearly.
 
