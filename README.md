@@ -6,7 +6,7 @@ Like the title indicates, this program takes two bitmap images and blends them a
 
 | Step | Image |
 |------|-------|
-| Image A | ![lion](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true) |
+| Image A | ![lion](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true =100) |
 | Image B | ![wolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true) |
 | Blended | ![lolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true) |
 
