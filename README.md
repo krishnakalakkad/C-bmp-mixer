@@ -4,7 +4,7 @@
 
 Like the title indicates, this program takes two bitmap images and blends them according to an input ratio. For examples, if the user took this bitmap image
 
-| Image A | Image B | Blended |
+| Image A | Image B | Blended @ 50% |
 |------|-------| ------ |
 | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true" align="center" width="300"> | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true" align="center" width="300"> | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true" align="center" width="300"> |
 
@@ -19,7 +19,7 @@ I designed this program for my systems programming class. This project tested my
 
 Dynamic memory is set up in such a way that I couldn't just `fread()` all the information from the bitmap into the `filetagheader`, `infotagheader`, and the image data at one shot because I would always run into corruption problems.
 
-#### My approach
+### My approach
 
 I used pen and paper to draw what the memory allocated for the `filetagheader` looked like.
 
@@ -28,10 +28,12 @@ I used pen and paper to draw what the memory allocated for the `filetagheader` l
 
 I discovered that there was a lot of padding within the filetagheader data structure, which is why the brutish method of trying to `fread()` all the data at one shot would not work. As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a bunch of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code a pain. So I decided to make a C file called `setUp.c`, and write a function called `void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup);` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
 
-##### Result
-I applied this organization style of compartmentalizing functions into different C files, whick reduced my main function by over 300 lines. To do this, I had to pass many thing through reference, so I needed to create a lot of different data structures to organize all the data I had to keep track of. These are the supplementary data structures that helped me:
+#### Result
+I applied this organization style of compartmentalizing functions into different C files, whick reduced my main function by over 300 lines. To do this, I had to pass many things through reference, so I needed to create a lot of different data structures to organize all the data I had to keep track of. These are the supplementary data structures that helped me:
 
 ```
+// Sample supplementary data stucture found in datastructures.h
+
 typedef struct
 {
     FILE* file1;
