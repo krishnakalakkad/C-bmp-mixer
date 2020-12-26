@@ -41,11 +41,33 @@ I designed this program for my systems programming class. This project tested my
 When I was first taught about memory and using `malloc`, I would allocate small primitive data structures and, if I was feeling a little ambitious, a small paragraph of chars. That's why this project was so daunting. I couldn't just `fread()` all the information from the bitmap into the `filetagheader`, `infotagheader`, and the image data at one shot because I would always run into corruption problems.
 
 **My approach**
-
-It was painful, but I had to start from scratch. I used pen and paper to draw what the memory allocated for the `filetagheader` looked like. I probably spent more time drawing what the memory looked like in front of a piece of paper than in my actual IDE. What I discovered was that there was a lot of padding within the filetagheader data structure, which is why the brutish method of trying to `fread()` all the data at one shot would not work. As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a bunch of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code a pain. So decided to make a C file called `setUp.c`, and write a function called `void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup);` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
+I used pen and paper to draw what the memory allocated for the `filetagheader` looked like. I probably spent more time drawing what the memory looked like in front of a piece of paper than in my actual IDE. What I discovered was that there was a lot of padding within the filetagheader data structure, which is why the brutish method of trying to `fread()` all the data at one shot would not work. As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a bunch of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code a pain. So decided to make a C file called `setUp.c`, and write a function called `void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup);` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
 
 **Effects that this approach had on organization**
-I applied this organization style of compartmentalizing functions into different C files, whick reduced my main function by over 300 lines. To do this, I had to pass many thing through reference, so I needed to create a lot of different data structures to organize all the data I had to keep track of. For example, I had to make a data structure called `ImageAttributes` so that accessing the attributes of the biggest image was easier. Compartmentalizing everything makes the debugging process much more transparent on all debugging applications because the backtrace from a debugging software shows the cause of the error much more clearly.
+I applied this organization style of compartmentalizing functions into different C files, whick reduced my main function by over 300 lines. To do this, I had to pass many thing through reference, so I needed to create a lot of different data structures to organize all the data I had to keep track of. These are the supplementary data structures that helped me:
+
+`typedef struct
+{
+    FILE* file1;
+    FILE* file2;
+    FILE* final;
+} FileGroup;
+
+typedef struct {
+    tagBITMAPFILEHEADER fileHd1, fileHd2, finalFileHd;
+} FileHeaderGroup;
+
+typedef struct {
+    tagBITMAPINFOHEADER infoHd1, infoHd2, finalInfoHd;
+} InfoHeaderGroup;
+
+typedef struct
+{
+    int width, height, padWidth, size;
+	FILE* file;
+} ImageAttributes;`
+
+Compartmentalizing everything makes the debugging process much more transparent on all debugging applications because the backtrace from a debugging software shows the cause of the error much more clearly.
 
 **What I gained from this experience**
 
