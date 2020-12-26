@@ -6,21 +6,9 @@ Like the title indicates, this program takes two bitmap images and blends them a
 
 | Step | Image |
 |------|-------|
-| Image A | ![lion](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true =100) |
-| Image B | ![wolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true) |
-| Blended | ![lolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true) |
-
-
-
-![lion](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true)
-
-and this image
-
-![wolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true)
-
-and input these images into the mixer with a ratio of 0.5, the resulting output of the program would be this.
-
-![lolf](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true)
+| Image A | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true" align="center" width="300"> |
+| Image B | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true" align="center" width="300"> |
+| Blended | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true" align="center" width="300"> |
 
 
 # How to use this program 
