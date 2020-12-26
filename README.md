@@ -2,7 +2,8 @@
 
 ## What is this project?
 
-Like the title indicates, this program takes two bitmap images and blends them according to an input ratio. For examples, if the user took this bitmap image
+This program takes two bitmap images and blends them according to an input ratio. For example, if the user took bitmap images of a lion and a wolf and blended them with a 0.5 ratio using the program, the result would look like this:
+
 
 | Image A | Image B | Blended @ 50% |
 |------|-------| ------ |
@@ -11,30 +12,46 @@ Like the title indicates, this program takes two bitmap images and blends them a
 
 ## Project Motivation & Goals
 
-I designed this program for my systems programming class. This project tested my foundations of allocated memory and data structures on the heap. I also learned how to implement bilinear interpolation such the program could blend images of different sizes seemlessly. 
+I designed this program for my systems programming class. This project tested my foundations of allocated memory and data structures on the heap. I also learned how to implement bilinear interpolation such that the program could blend images of different sizes seemlessly. 
 
 ## Challenges
 
 ### Memory allocation
 
-Dynamic memory is set up in such a way that I couldn't just `fread()` all the information from the bitmap into the `filetagheader`, `infotagheader`, and the image data at one shot because I would always run into corruption problems.
+Dynamic memory is set up in such a way that I couldn't `fread()` all the information from the bitmap into the `filetagheader` at one shot because I would always run into corruption problems.
 
 ### My approach
 
 I discovered that there was a lot of padding within the filetagheader data structure, which is why the brutish method of trying to `fread()` all the data at one shot would not work. 
 
-As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a several of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code a pain. So I decided to make a C file called `setUp.c`, and write a function called `void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup);` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
+As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a several of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code more difficult than it needs to be. Thus, I decided to make a C file called `setUp.c`, and write a function called `void readEverything();` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
+
+Here is my `readEverything()` function.
 
 ```
-readingEverything(FileHeader) {
+void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup){
+    fread(&(headGroup->fileHd1.bfType), 2, 1, fileGroup->file1);
+	fread(&(headGroup->fileHd2.bfType), 2, 1, fileGroup->file2);
+	
+	fread(&(headGroup->fileHd1.bfSize), 4, 1, fileGroup->file1);
+	fread(&(headGroup->fileHd2.bfSize), 4, 1, fileGroup->file2);
 
+	fread(&(headGroup->fileHd1.bfReserved1), 2, 1, fileGroup->file1);
+	fread(&(headGroup->fileHd2.bfReserved1), 2, 1, fileGroup->file2);
+
+	fread(&(headGroup->fileHd1.bfReserved2), 2, 1, fileGroup->file1);
+	fread(&(headGroup->fileHd2.bfReserved2), 2, 1, fileGroup->file2);
+
+	fread(&(headGroup->fileHd1.bfOffBits), 4, 1, fileGroup->file1);
+	fread(&(headGroup->fileHd2.bfOffBits), 4, 1, fileGroup->file2);
+
+	fread(&(infoGroup->infoHd1), sizeof(tagBITMAPINFOHEADER), 1, fileGroup->file1);
+	fread(&(infoGroup->infoHd2), sizeof(tagBITMAPINFOHEADER), 1, fileGroup->file2);
 }
-
 ```
-
 
 #### Result
-I applied this organization style of compartmentalizing functions into different C files, whick reduced my main function by over 300 lines. To do this, I had to pass many things through reference, so I needed to create a lot of different data structures to organize all the data I had to keep track of. These are the supplementary data structures that helped me:
+I applied this organization style of compartmentalizing functions across my entire program, and I organized my code in specific C and header files, which reduced my main function by over 300 lines. To do this, I had to pass many things through reference, so I needed to create different data structures to manage everything I had to pass by reference. These are the supplementary data structures that helped me accomplish this:
 
 ```
 // Sample supplementary data stucture found in datastructures.h
@@ -63,13 +80,11 @@ typedef struct
 ```
 
 
-Compartmentalizing everything makes the debugging process much more transparent on all debugging applications because the backtrace from a debugging software shows the cause of the error much more clearly.
+Compartmentalizing everything makes the debugging process more transparent on all debugging applications because the backtrace from a debugging software shows the cause of the error much more clearly.
 
 ## Project Learnings
 
-NOTE: Expand on what this understanding enables you to do.
-
-I improved my ability to visualize data structures that seem.... In general, I feel that I improved my ability to visualize how different functions like `fread()` scan information into data structures malloced on the heap. 
+I improved my ability to visualize data structures that are unfamiliar with me. Whenever I come across a different media format, I always put importance on the visualization of dynamic memory and organization before attempting to write any code. In general, I feel that I improved my ability to visualize how different functions like `fread()` scan information into data structures allocated on the heap. 
 
 ## How to use this program 
 
