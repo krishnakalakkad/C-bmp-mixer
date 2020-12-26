@@ -48,6 +48,9 @@ I applied this organization style of compartmentalizing functions into different
 
 
 
+![datastructures](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/datastructures.png?raw=true)
+
+
 Compartmentalizing everything makes the debugging process much more transparent on all debugging applications because the backtrace from a debugging software shows the cause of the error much more clearly.
 
 **What I gained from this experience**
