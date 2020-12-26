@@ -1,6 +1,6 @@
-## C-bmp-mixer
+# C-bmp-mixer
 
-# What is this project?
+## What is this project?
 
 Like the title indicates, this program takes two bitmap images and blends them according to an input ratio. For examples, if the user took this bitmap image
 
@@ -9,27 +9,13 @@ Like the title indicates, this program takes two bitmap images and blends them a
 | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lion.png?raw=true" align="center" width="300"> | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/wolf.png?raw=true" align="center" width="300"> | <img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/lolf.png?raw=true" align="center" width="300"> |
 
 
-
-# How to use this program 
-
-To compile the program, enter
-
-`make`
-
-into the terminal. To execute, enter
-
-`./blend [imagefile1] [imagefile2] [ratio] [outputfile]`
-
-Where `imagefile1` and `imagefile2` are the images you want to blend, `ratio` is the percentage of each image you want to blend (for example, a `ratio` of 0.7 would mean that the final image would be 70% of `imagefile1` and 30% of `imagefile2`),  and `outputfile` is the where you want to store your final result.
-
-
-# Why I made this project and what I learned from it
+## Project Motivation & Goals
 
 I designed this program for my systems programming class. This project tested my foundations of allocated memory and data structures on the heap. I also learned how to implement bilinear interpolation such the program could blend images of different sizes seemlessly. 
 
-## Challenges I faced
+## Challenges
 
-# Memory allocation
+### Memory allocation
 
 **The Problem**
 
@@ -38,7 +24,7 @@ Dynamic memory is set up in such a way that I couldn't just `fread()` all the in
 **My approach**
 I used pen and paper to draw what the memory allocated for the `filetagheader` looked like.
 
-![drawing2](https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/Drawing2.JPG)
+<img src="https://github.com/krishnakalakkad/C-bmp-mixer/blob/master/Drawing2.JPG" width="500">
 
 
 I discovered that there was a lot of padding within the filetagheader data structure, which is why the brutish method of trying to `fread()` all the data at one shot would not work. As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a bunch of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code a pain. So I decided to make a C file called `setUp.c`, and write a function called `void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup);` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
@@ -59,5 +45,15 @@ While it is true that the BMP format is pretty obselete in a time where JPG, PNG
 
 
 
+## How to use this program 
 
+To compile the program, enter
+
+`make`
+
+into the terminal. To execute, enter
+
+`./blend [imagefile1] [imagefile2] [ratio] [outputfile]`
+
+Where `imagefile1` and `imagefile2` are the images you want to blend, `ratio` is the percentage of each image you want to blend (for example, a `ratio` of 0.7 would mean that the final image would be 70% of `imagefile1` and 30% of `imagefile2`),  and `outputfile` is the where you want to store your final result.
 
