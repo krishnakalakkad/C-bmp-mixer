@@ -26,7 +26,7 @@ I discovered that there was a lot of padding within the filetagheader data struc
 
 As such, I had to `fread()` every single primitive data structure in the `filetagheader`. At the same time, writing a several of `fread()` statements in my main makes the code hard to read for other contributers, and it makes debugging the code more difficult than it needs to be. Thus, I decided to make a C file called `setUp.c`, and write a function called `void readEverything()` such that if there was an error that occurred during any one of the `fread`s, I could easily trace it back and set my breakpoints a lot more efficiently, whether I was in GDB or some other IDE. 
 
-Here is my `readEverything()` function.
+The full `readEverything()` function can be found below.
 
 ```
 void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, FileGroup *fileGroup){
