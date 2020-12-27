@@ -84,7 +84,7 @@ Compartmentalizing everything makes the debugging process more transparent on al
 
 ## Project Learnings
 
-I improved my ability to visualize data structures that are unfamiliar with me. Whenever I come across a different media format, I always put importance on the visualization of dynamic memory and organization before attempting to write any code. In general, I feel that I improved my ability to visualize how different functions like `fread()` scan information into data structures allocated on the heap. 
+I improved my ability to visualize unfamiliar data structures. Whenever I come across a different media format, I always put importance on the visualization of dynamic memory and organization before attempting to write any code. In general, I feel that I improved my ability to visualize how different functions like `fread()` scan information into data structures allocated on the heap. 
 
 ## How to use this program 
 
