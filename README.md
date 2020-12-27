@@ -51,7 +51,7 @@ void readEverything(FileHeaderGroup *headGroup, InfoHeaderGroup *infoGroup, File
 ```
 
 #### Result
-I applied this organization style of compartmentalizing functions across my entire program, and I organized my code in specific C and header files, which reduced my main function by over 300 lines. To do this, I had to pass many things through reference, so I needed to create different data structures to manage everything I had to pass by reference. These are the supplementary data structures that helped me accomplish this:
+I applied this organization style of compartmentalizing functions across my entire program, and I organized my code in specific C and header files, which reduced my main function by over 300 lines. To do this, I had to pass many arguments through reference, so I needed to create different data structures to manage everything I had to pass by reference. These are the supplementary data structures that helped me accomplish this:
 
 ```
 // Sample supplementary data stucture found in datastructures.h
